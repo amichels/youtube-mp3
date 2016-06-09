@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ffmpeg-node": "latest",
-    "youtube-dl": "latest"
+    "youtube-dl": "latest",
+    "fluent-ffmpeg": "latest"
   }
 }

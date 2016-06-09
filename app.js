@@ -1,16 +1,15 @@
-var fs = require('fs');
-var youtubedl = require('youtube-dl');
-var video = youtubedl('https://www.youtube.com/watch?v=okF5gOTX9uM',
-  // Optional arguments passed to youtube-dl.
-  ['--format=18'],
-  // Additional options can be given for calling `child_process.execFile()`.
-  { cwd: __dirname });
+var fs = require('fs'),
+		youtubedl = require('youtube-dl'),
+		ffmpeg = require('fluent-ffmpeg'),
+		video = youtubedl('https://www.youtube.com/watch?v=okF5gOTX9uM');
 
 // Will be called when the download starts.
 video.on('info', function(info) {
   console.log('Download started');
-  console.log('filename: ' + info.filename);
+  console.log('filename: ' + info._filename);
   console.log('size: ' + info.size);
 });
 
-video.pipe(fs.createWriteStream('myvideo.mp4'));
+var proc = new ffmpeg({source:video});
+proc.setFfmpegPath('/Applications/ffmpeg/ffmpeg');
+proc.save('audio.mp3');
